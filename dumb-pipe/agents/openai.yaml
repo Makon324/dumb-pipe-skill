@@ -1,0 +1,7 @@
+interface:
+  display_name: "Dumb Pipe"
+  short_description: "Execute literal requests with no added scope"
+  default_prompt: "Use $dumb-pipe to perform this request literally and return only the requested result."
+
+policy:
+  allow_implicit_invocation: false
