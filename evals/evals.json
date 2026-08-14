@@ -1,0 +1,69 @@
+{
+  "skill_name": "dumb-pipe",
+  "run": {
+    "executed_at": "2026-08-14T20:25:00.1035264Z",
+    "runner": "Luna sub-agents",
+    "status": "completed",
+    "passed": 4,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Return exactly the single word READY and nothing else.",
+      "expected_output": "READY",
+      "files": [],
+      "expectations": [
+        "Returns exactly READY.",
+        "Adds no explanation, wrapper, or extra text."
+      ],
+      "result": {
+        "status": "passed",
+        "observed_output": "READY"
+      }
+    },
+    {
+      "id": 2,
+      "prompt": "Transform this text by putting each comma-separated item on its own line: alpha, beta, gamma",
+      "expected_output": "alpha\nbeta\ngamma",
+      "files": [],
+      "expectations": [
+        "Places each item on its own line.",
+        "Returns only the transformed text."
+      ],
+      "result": {
+        "status": "passed",
+        "observed_output": "alpha\nbeta\ngamma"
+      }
+    },
+    {
+      "id": 3,
+      "prompt": "From this sentence, extract only the number: There are 42 apples.",
+      "expected_output": "42",
+      "files": [],
+      "expectations": [
+        "Extracts the number 42.",
+        "Returns no surrounding explanation or punctuation."
+      ],
+      "result": {
+        "status": "passed",
+        "observed_output": "42"
+      }
+    },
+    {
+      "id": 4,
+      "prompt": "Rewrite the following into a lowercase single line, preserving words and order: \"Hello World\"",
+      "expected_output": "hello world",
+      "files": [],
+      "expectations": [
+        "Converts the text to lowercase.",
+        "Preserves word order and returns a single line only."
+      ],
+      "result": {
+        "status": "passed",
+        "observed_output": "hello world"
+      }
+    }
+  ]
+}
