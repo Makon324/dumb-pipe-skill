@@ -2,5 +2,4 @@ alpha|1|ready
 beta|2|pending
 gamma|3|ready
 
-# Fixture notes
-This file intentionally includes a blank line and a comment-like line so evals can check whether the dumb-pipe skill preserves input faithfully and handles non-data text without silently inventing records.
+# Fixture note: this line is not a record.

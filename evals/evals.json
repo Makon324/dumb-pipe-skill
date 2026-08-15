@@ -1,69 +1,201 @@
 {
   "skill_name": "dumb-pipe",
-  "run": {
-    "executed_at": "2026-08-14T20:25:00.1035264Z",
-    "runner": "Luna sub-agents",
-    "status": "completed",
-    "passed": 4,
-    "failed": 0,
-    "pass_rate": 1.0
-  },
   "evals": [
     {
       "id": 1,
-      "prompt": "Return exactly the single word READY and nothing else.",
-      "expected_output": "READY",
+      "prompt": "$dumb-pipe Return exactly READY.",
+      "expected_output": "The response consists of the exact token READY with no surrounding text or formatting.",
       "files": [],
       "expectations": [
-        "Returns exactly READY.",
-        "Adds no explanation, wrapper, or extra text."
-      ],
-      "result": {
-        "status": "passed",
-        "observed_output": "READY"
-      }
+        "The response is exactly READY",
+        "The response contains no explanation, label, quotation marks, or code fence"
+      ]
     },
     {
       "id": 2,
-      "prompt": "Transform this text by putting each comma-separated item on its own line: alpha, beta, gamma",
-      "expected_output": "alpha\nbeta\ngamma",
+      "prompt": "$dumb-pipe Put each comma-separated value on its own line and return only the converted text: alpha, beta, gamma",
+      "expected_output": "The response contains alpha, beta, and gamma on separate lines in source order, with no additional text.",
       "files": [],
       "expectations": [
-        "Places each item on its own line.",
-        "Returns only the transformed text."
-      ],
-      "result": {
-        "status": "passed",
-        "observed_output": "alpha\nbeta\ngamma"
-      }
+        "The response is exactly alpha, beta, and gamma on three separate lines",
+        "The values remain in their original order",
+        "The response contains no bullets, numbering, or introductory text"
+      ]
     },
     {
       "id": 3,
-      "prompt": "From this sentence, extract only the number: There are 42 apples.",
-      "expected_output": "42",
+      "prompt": "$dumb-pipe Extract only the incident identifier from this sentence: The deployment was halted by incident INC-2048 at 14:07 UTC.",
+      "expected_output": "The response consists only of the incident identifier INC-2048.",
       "files": [],
       "expectations": [
-        "Extracts the number 42.",
-        "Returns no surrounding explanation or punctuation."
-      ],
-      "result": {
-        "status": "passed",
-        "observed_output": "42"
-      }
+        "The response is exactly INC-2048",
+        "The response excludes the timestamp and surrounding sentence"
+      ]
     },
     {
       "id": 4,
-      "prompt": "Rewrite the following into a lowercase single line, preserving words and order: \"Hello World\"",
-      "expected_output": "hello world",
+      "prompt": "$dumb-pipe Convert this text to lowercase while preserving its punctuation and word order. Return only the result: Quarterly Review: Phase II",
+      "expected_output": "The response is the lowercase text quarterly review: phase ii, with punctuation and word order preserved.",
       "files": [],
       "expectations": [
-        "Converts the text to lowercase.",
-        "Preserves word order and returns a single line only."
+        "Every letter is lowercase",
+        "The colon and word order match the source text",
+        "The response contains no surrounding explanation or formatting"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "$dumb-pipe From sample.txt, return only the pipe-delimited record lines whose final field is ready. Preserve their original order and return nothing else.",
+      "expected_output": "The response contains the alpha and gamma records exactly as written, in source order, and excludes the pending record and non-record text.",
+      "files": [
+        "evals/files/sample.txt"
       ],
-      "result": {
-        "status": "passed",
-        "observed_output": "hello world"
-      }
+      "expectations": [
+        "The response contains exactly alpha|1|ready and gamma|3|ready on separate lines",
+        "The response does not include beta|2|pending",
+        "The response does not include the blank line or fixture note",
+        "The response contains no headings, bullets, or explanation"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Use $dumb-pipe with accounts.csv. Return the account_id for each active EU account, one per line, in file order. Return only those identifiers.",
+      "expected_output": "The response contains AC-1042 and AC-1044 on separate lines in file order, with no other fields or commentary.",
+      "files": [
+        "evals/files/accounts.csv"
+      ],
+      "expectations": [
+        "The response contains exactly AC-1042 and AC-1044 on separate lines",
+        "The response excludes accounts outside the EU and accounts that are not active",
+        "The response preserves file order",
+        "The response contains no header or explanation"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Use $dumb-pipe with release-notes.md. Replace only `Status: draft` with `Status: approved`, preserve every other character, and return the complete revised content without a code fence.",
+      "expected_output": "The complete file content with the status changed to approved and all other text, spacing, headings, and list items preserved exactly.",
+      "files": [
+        "evals/files/release-notes.md"
+      ],
+      "expectations": [
+        "The response contains Status: approved and does not contain Status: draft",
+        "Every line other than the status line matches the source file",
+        "The response includes the complete revised file rather than an excerpt or summary",
+        "The response is not wrapped in a code fence and contains no explanation"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "$dumb-pipe From service.log, return only the message portion of ERROR entries, one per line, in chronological order. Do not include timestamps or log levels.",
+      "expected_output": "The response contains the two ERROR messages in chronological order, without timestamps, log levels, or non-error entries.",
+      "files": [
+        "evals/files/service.log"
+      ],
+      "expectations": [
+        "The response contains [AUTH-17] Token validation failed and [DB-04] Connection pool exhausted on separate lines",
+        "The messages appear in chronological order",
+        "The response excludes INFO and WARN entries",
+        "The response excludes timestamps, log levels, and explanatory text"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "$dumb-pipe Return the Total value from the attached report.",
+      "expected_output": "A concise statement that the report is not specified; the response must not select or combine either attached report.",
+      "files": [
+        "evals/files/q1-report.txt",
+        "evals/files/q2-report.txt"
+      ],
+      "expectations": [
+        "The response states only that the report is not specified",
+        "The response does not return 18420 or 23110",
+        "The response does not choose, compare, or combine the two reports",
+        "The response does not add an explanation, recommendation, or follow-up question"
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "Use $dumb-pipe with configuration.ini. Change only `retries = 3` to `retries = 5`. Preserve the complete file exactly otherwise and return the revised content without a code fence.",
+      "expected_output": "The complete configuration with retries set to 5 and all comments, blank lines, spacing, section names, and other values preserved exactly.",
+      "files": [
+        "evals/files/configuration.ini"
+      ],
+      "expectations": [
+        "The response contains retries = 5 and does not contain retries = 3",
+        "All other lines and whitespace match the source file",
+        "The response includes the complete revised configuration",
+        "The response is not wrapped in a code fence and contains no explanation"
+      ]
     }
-  ]
+  ],
+  "results": {
+    "model": "gpt-5.6-luna",
+    "reasoning_effort": "medium",
+    "passed": 10,
+    "failed": 0,
+    "total": 10,
+    "cases": [
+      {
+        "id": 1,
+        "actual_output": "READY",
+        "passed": true,
+        "failure_reason": ""
+      },
+      {
+        "id": 2,
+        "actual_output": "alpha\nbeta\ngamma",
+        "passed": true,
+        "failure_reason": ""
+      },
+      {
+        "id": 3,
+        "actual_output": "INC-2048",
+        "passed": true,
+        "failure_reason": ""
+      },
+      {
+        "id": 4,
+        "actual_output": "quarterly review: phase ii",
+        "passed": true,
+        "failure_reason": ""
+      },
+      {
+        "id": 5,
+        "actual_output": "alpha|1|ready\ngamma|3|ready",
+        "passed": true,
+        "failure_reason": ""
+      },
+      {
+        "id": 6,
+        "actual_output": "AC-1042\nAC-1044",
+        "passed": true,
+        "failure_reason": ""
+      },
+      {
+        "id": 7,
+        "actual_output": "# Release notes\n\nVersion: 2.4.0\nStatus: approved\n\n## Changes\n\n- Added retry handling.\n- Corrected timeout reporting.\n\n## Internal note\n\nDo not publish until approval is recorded.\n",
+        "passed": true,
+        "failure_reason": ""
+      },
+      {
+        "id": 8,
+        "actual_output": "[AUTH-17] Token validation failed\n[DB-04] Connection pool exhausted",
+        "passed": true,
+        "failure_reason": ""
+      },
+      {
+        "id": 9,
+        "actual_output": "The report is not specified.",
+        "passed": true,
+        "failure_reason": ""
+      },
+      {
+        "id": 10,
+        "actual_output": "# Worker settings\nworkers = 4\nretries = 5\n\n[output]\nformat = json\ninclude_debug = false\n",
+        "passed": true,
+        "failure_reason": ""
+      }
+    ]
+  }
 }

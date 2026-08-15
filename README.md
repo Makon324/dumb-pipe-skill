@@ -80,6 +80,8 @@ dumb-pipe/
 
 Keep changes minimal and consistent with the skill's execution-only purpose. Include a concrete example showing why a behavioral change is needed.
 
+For eval cases, use realistic prompts and describe expected behavior in neutral, specific, verifiable terms. Avoid promotional claims, superlatives, and vague quality statements.
+
 ## License
 
 [MIT](LICENSE)

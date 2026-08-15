@@ -1,0 +1,5 @@
+2026-08-14T08:15:02Z INFO Worker started
+2026-08-14T08:15:09Z ERROR [AUTH-17] Token validation failed
+2026-08-14T08:15:11Z WARN Retrying request
+2026-08-14T08:15:22Z ERROR [DB-04] Connection pool exhausted
+2026-08-14T08:15:30Z INFO Worker stopped
